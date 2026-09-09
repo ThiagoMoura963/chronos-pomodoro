@@ -1,15 +1,18 @@
-import { TimerIcon } from "lucide-react";
-import { Heading } from "./assets/components/Heading";
+import { Container } from "./components/Container";
+import { Heading } from "./components/Heading";
+import "./styles/global.css";
+import "./styles/theme.css";
 
 function App() {
   return (
     <>
-      <Heading>
-        Chronos Pomodoro{" "}
-        <button>
-          <TimerIcon />
-        </button>{" "}
-      </Heading>
+      <Container>
+        <Heading>LOGO</Heading>
+      </Container>
+
+      <Container>
+        <Heading>MENU</Heading>
+      </Container>
     </>
   );
 }
