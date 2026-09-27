@@ -15,7 +15,9 @@ import { toastifyWrapper } from "../../adapters/toastifyWrapper";
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
 
-  const [taskName, setTaskName] = useState("");
+  const lastTaskName = state.task[state.task.length - 1]?.name;
+
+  const [taskName, setTaskName] = useState(lastTaskName ?? "");
 
   const nextCycle = getNextCycle(state.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
@@ -25,7 +27,7 @@ export function MainForm() {
     toastifyWrapper.dimiss();
 
     if (!taskName.trim()) {
-      alert("Digite o nome da tarefa!");
+      toastifyWrapper.warning("Digite o nome da tarefa!");
       return;
     }
 
