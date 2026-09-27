@@ -5,16 +5,32 @@ import { taskReducer } from "./taskReducer";
 import { TaskContext } from "./TaskContext";
 import { TaskActionTypes } from "./taskActions";
 import { loadBeep } from "../../utils/loadBeep";
+import type { TaskStateModel } from "../../models/TaskStateModel";
 
 type TaskContextProviderProps = {
   children: React.ReactNode;
 };
 
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
-  const [state, dispatch] = useReducer(taskReducer, initialTaskState);
+  const [state, dispatch] = useReducer(taskReducer, initialTaskState, () => {
+    const storageState = localStorage.getItem("state");
+
+    if (!storageState) return initialTaskState;
+
+    const storageStateParsed = JSON.parse(storageState) as TaskStateModel;
+
+    return {
+      ...storageStateParsed,
+      activeTask: null,
+      secondsRemaining: 0,
+      formattedSecondsRemaining: "00:00",
+    };
+  });
   const playLoadBeepRef = useRef<ReturnType<typeof loadBeep> | null>(null);
 
   useEffect(() => {
+    localStorage.setItem("state", JSON.stringify(state));
+
     if (!state.activeTask) return;
 
     document.title = `${state.formattedSecondsRemaining} - Chronos Pomodoro`;
