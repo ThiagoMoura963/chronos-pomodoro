@@ -1,6 +1,6 @@
 import type { TaskModel } from "../models/TaskModel";
 
-type sortTaskOptions = {
+export type SortTaskOptions = {
   tasks: TaskModel[];
   direction?: "desc" | "asc";
   field?: keyof TaskModel;
@@ -10,7 +10,7 @@ export function sortTask({
   tasks = [],
   direction = "desc",
   field = "startDate",
-}: sortTaskOptions): TaskModel[] {
+}: SortTaskOptions): TaskModel[] {
   return [...tasks].sort((a, b) => {
     const aValue = a[field];
     const bValue = b[field];
