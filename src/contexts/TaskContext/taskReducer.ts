@@ -19,7 +19,7 @@ export function taskReducer(
         currentCycle: nextCycle,
         secondsRemaining,
         formattedSecondsRemaining: formatSecondsToMinute(secondsRemaining),
-        task: [...state.task, newTask],
+        tasks: [...state.tasks, newTask],
       };
     }
 
@@ -29,7 +29,7 @@ export function taskReducer(
         activeTask: null,
         secondsRemaining: 0,
         formattedSecondsRemaining: "00:00",
-        task: state.task.map((task) => {
+        tasks: state.tasks.map((task) => {
           if (task.id === state?.activeTask?.id) {
             return { ...task, interrupteDate: Date.now() };
           }
@@ -45,7 +45,7 @@ export function taskReducer(
         activeTask: null,
         secondsRemaining: 0,
         formattedSecondsRemaining: "00:00",
-        task: state.task.map((task) => {
+        tasks: state.tasks.map((task) => {
           if (task.id === state?.activeTask?.id) {
             return { ...task, completeDate: Date.now() };
           }

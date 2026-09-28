@@ -15,7 +15,7 @@ import { toastifyWrapper } from "../../adapters/toastifyWrapper";
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
 
-  const lastTaskName = state.task[state.task.length - 1]?.name;
+  const lastTaskName = state.tasks[state.tasks.length - 1]?.name;
 
   const [taskName, setTaskName] = useState(lastTaskName ?? "");
 
